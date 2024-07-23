@@ -5,4 +5,12 @@
     <color name="dark_blue">#32357a</color>
     <color name="light_blue">#f2f1f6</color>
 
+
+
+    <color name="night_mode">#612481</color>
+    <color name="notifications">#13B2C3</color>
+
+    <color name="private_account">#E6A326</color>
+    <color name="security">#D95F69</color>
+
 </resources>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_blue"
-    tools:context=".profileActivity">
+    tools:context=".ProfileActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                     android:id="@+id/imageView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="-1dp"
+                    android:layout_marginBottom="-2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -34,7 +34,7 @@
                     app:srcCompat="@drawable/arc_3" />
 
                 <ImageView
-                    android:id="@+id/imageView7"
+                    android:id="@+id/profileImageProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toTopOf="@+id/imageView6"
@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:text="Profile"
+                    android:text="@string/profileTextProfile"
                     android:textColor="@color/white"
                     android:textSize="30sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -56,6 +56,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/backProfile"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginStart="32dp"
@@ -78,33 +79,35 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/nameProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="AliAwela"
+                android:text="@string/nameProfile"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"
                 android:textAlignment="center"
 
                 android:textColor="@color/dark_blue"
                 android:textSize="26sp"/>
+
             <TextView
+                android:id="@+id/emailProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ali123awela@gmail.com"
-                android:textAlignment="center"
-                />
+                android:text="@string/emailProfile"
+                android:textAlignment="center" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/notificationProfile"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:layout_height="match_parent">
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="16dp">
 
                 <ImageView
-                    android:id="@+id/imageView9"
+                    android:id="@+id/notficationIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -113,20 +116,20 @@
                     app:srcCompat="@drawable/btn_1" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/notificationTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Notification"
-                    android:textStyle="bold"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/notificationProfile"
                     android:textColor="@color/dark_blue"
                     android:textSize="20sp"
-                    android:layout_marginStart="16dp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView9"
-                    app:layout_constraintTop_toTopOf="@+id/imageView9" />
+                    app:layout_constraintStart_toEndOf="@+id/notficationIcon"
+                    app:layout_constraintTop_toTopOf="@+id/notficationIcon" />
 
                 <ImageView
-                    android:id="@+id/imageView10"
+                    android:id="@+id/goNotification"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -143,7 +146,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView9"
+                    android:id="@+id/calenderIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -152,20 +155,20 @@
                     app:srcCompat="@drawable/btn_2" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/calenderTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Calender"
+                    android:text="@string/calenderProfile"
                     android:textColor="@color/dark_blue"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView9"
-                    app:layout_constraintTop_toTopOf="@+id/imageView9" />
+                    app:layout_constraintStart_toEndOf="@+id/calenderIcon"
+                    app:layout_constraintTop_toTopOf="@+id/calenderIcon" />
 
                 <ImageView
-                    android:id="@+id/imageView10"
+                    android:id="@+id/goCalender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -182,7 +185,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView9"
+                    android:id="@+id/galleryIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -191,20 +194,20 @@
                     app:srcCompat="@drawable/btn_3" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/galleryTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Gallery"
+                    android:text="@string/galleryProfile"
                     android:textColor="@color/dark_blue"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView9"
-                    app:layout_constraintTop_toTopOf="@+id/imageView9" />
+                    app:layout_constraintStart_toEndOf="@+id/galleryIcon"
+                    app:layout_constraintTop_toTopOf="@+id/galleryIcon" />
 
                 <ImageView
-                    android:id="@+id/imageView10"
+                    android:id="@+id/goGallery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -221,7 +224,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView9"
+                    android:id="@+id/favoriteIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -230,20 +233,20 @@
                     app:srcCompat="@drawable/btn_4" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/favoriteTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="My Favorite"
+                    android:text="@string/my_favoriteProfile"
                     android:textColor="@color/dark_blue"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView9"
-                    app:layout_constraintTop_toTopOf="@+id/imageView9" />
+                    app:layout_constraintStart_toEndOf="@+id/favoriteIcon"
+                    app:layout_constraintTop_toTopOf="@+id/favoriteIcon" />
 
                 <ImageView
-                    android:id="@+id/imageView10"
+                    android:id="@+id/goFavorite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -260,7 +263,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView9"
+                    android:id="@+id/shareIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -269,20 +272,20 @@
                     app:srcCompat="@drawable/btn_5" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/shareTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Share"
+                    android:text="@string/shareProfile"
                     android:textColor="@color/dark_blue"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView9"
-                    app:layout_constraintTop_toTopOf="@+id/imageView9" />
+                    app:layout_constraintStart_toEndOf="@+id/shareIcon"
+                    app:layout_constraintTop_toTopOf="@+id/shareIcon" />
 
                 <ImageView
-                    android:id="@+id/imageView10"
+                    android:id="@+id/goShare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -299,7 +302,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView9"
+                    android:id="@+id/logoutIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -308,20 +311,20 @@
                     app:srcCompat="@drawable/btn_6" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/logoutTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Logout"
+                    android:text="@string/logoutProfile"
                     android:textColor="@color/dark_blue"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView9"
-                    app:layout_constraintTop_toTopOf="@+id/imageView9" />
+                    app:layout_constraintStart_toEndOf="@+id/logoutIcon"
+                    app:layout_constraintTop_toTopOf="@+id/logoutIcon" />
 
                 <ImageView
-                    android:id="@+id/imageView10"
+                    android:id="@+id/goLogout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"

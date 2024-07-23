@@ -20,7 +20,9 @@
                 android:layout_height="match_parent"
                 android:background="@color/dark_blue"
                 android:orientation="vertical">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/backFilterPage"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginStart="10dp"
@@ -48,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="15dp"
-                    android:text="Find Your Favorite\nPet!"
+                    android:text="@string/descriptionFilterPets"
                     android:textColor="@color/white"
                     android:textSize="30sp"
                     android:textStyle="bold" />
@@ -65,7 +67,7 @@
                     android:drawableStart="@drawable/search"
                     android:drawablePadding="16dp"
                     android:ems="10"
-                    android:hint="Search for Pets"
+                    android:hint="@string/searchBarHintFilterPets"
                     android:inputType="text"
                     android:padding="16dp"
                     android:textColor="@color/white"
@@ -76,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_weight="1"
-                    android:text="Categories"
+                    android:text="@string/categoriesFilterPets"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -93,9 +95,10 @@
 
 
                     <LinearLayout
+                        android:id="@+id/dogsFilterPage"
                         android:layout_width="match_parent"
-                        android:layout_marginStart="22dp"
                         android:layout_height="match_parent"
+                        android:layout_marginStart="22dp"
                         android:orientation="vertical">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -120,13 +123,15 @@
                             android:id="@+id/txtDogCategory"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Dogs"
+                            android:text="@string/dogsFilterPets"
                             android:textAlignment="center"
                             android:textColor="@color/white"
                             android:textSize="17sp"
                             android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
+                        android:id="@+id/catsFilterPage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="40dp"
@@ -154,13 +159,15 @@
                             android:id="@+id/txtCatCategory"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Cats"
+                            android:text="@string/catsFilterPets"
                             android:textAlignment="center"
-                            android:textSize="17sp"
                             android:textColor="@color/white"
+                            android:textSize="17sp"
                             android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
+                        android:id="@+id/othersFilterPage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="40dp"
@@ -188,10 +195,10 @@
                             android:id="@+id/txtOthersCategory"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Others"
-                            android:textSize="17sp"
+                            android:text="@string/othersFilterPets"
                             android:textAlignment="center"
                             android:textColor="@color/white"
+                            android:textSize="17sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 

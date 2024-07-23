@@ -22,7 +22,7 @@
             android:name=".FilterPets"
             android:exported="false" />
         <activity
-            android:name=".profileActivity"
+            android:name=".ProfileActivity"
             android:exported="false" />
         <activity
             android:name=".DashboardActivity"

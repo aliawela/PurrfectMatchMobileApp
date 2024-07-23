@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Welcome"
+                android:text="@string/welcomeSignup"
                 android:textColor="@color/dark_blue"
                 android:textSize="32sp"
                 android:textStyle="bold"/>
@@ -32,7 +32,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Please register with your information"
+                android:text="@string/registerTextSignup"
                 android:alpha="0.7" />
             <View
                 android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Username"
+                android:text="@string/usernameSignup"
                 android:alpha="0.7"
                 android:textStyle="bold"/>
 
@@ -56,7 +56,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email Address"
+                android:text="@string/email_addressSignup"
                 android:alpha="0.7"
                 android:textStyle="bold"/>
 
@@ -72,7 +72,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Password"
+                android:text="@string/passwordSignup"
                 android:alpha="0.7"
                 android:textStyle="bold"/>
 
@@ -85,22 +85,26 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
+                    android:id="@+id/haveAnAccountSignup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Already have an account"
-                    android:textStyle="bold"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:text="@string/already_have_an_accountSignup"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="10dp"/>
+
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/registerBtnSignup"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Register"
-                app:cornerRadius="32dp"/>
+                android:text="@string/registerLinkSignup"
+                app:cornerRadius="32dp" />
 
         </LinearLayout>
 
