@@ -69,12 +69,14 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
+                    android:id="@+id/tvDntHvAcc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/don_t_have_an_accountLogin"
-                    android:textStyle="bold"
-                    android:layout_centerVertical="true"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -87,7 +89,7 @@
                 android:layout_height="10dp"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/loginButtonLogin"
+                android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:text="@string/loginbtnTextLogin"
@@ -108,14 +110,14 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/googleLogin"
+                    android:id="@+id/ivGoogleLogin"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_margin="12dp"
                     android:background="@drawable/google" />
 
                 <ImageView
-                    android:id="@+id/facebookLogin"
+                    android:id="@+id/ivFacebookLogin"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_margin="12dp"

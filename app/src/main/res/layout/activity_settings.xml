@@ -240,13 +240,13 @@
 
                 <!-- SignIn-->
                 <RelativeLayout
-                    android:id="@+id/signinSettings"
+                    android:id="@+id/signInSettings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp">
 
                     <ImageView
-                        android:id="@+id/signinIcon"
+                        android:id="@+id/signInIcon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@drawable/round_notifications"
@@ -258,7 +258,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="20dp"
-                        android:layout_toEndOf="@id/signinIcon"
+                        android:layout_toEndOf="@id/signInIcon"
                         android:text="@string/sign_inSettings"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold" />
@@ -273,13 +273,13 @@
 
                 <!-- SignUp-->
                 <RelativeLayout
-                    android:id="@+id/signupSettings"
+                    android:id="@+id/signUpSettings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp">
 
                     <ImageView
-                        android:id="@+id/signupIcon"
+                        android:id="@+id/signUpIcon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@drawable/round_languages"
@@ -291,7 +291,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="20dp"
-                        android:layout_toEndOf="@id/signupIcon"
+                        android:layout_toEndOf="@id/signUpIcon"
                         android:text="@string/sign_upSettings"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold" />
@@ -318,6 +318,7 @@
                 android:padding="15dp">
                 <!-- Logout-->
                 <RelativeLayout
+                    android:id="@+id/logoutSettingLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 

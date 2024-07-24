@@ -51,4 +51,11 @@
     <string name="passwordSignup">Password</string>
     <string name="already_have_an_accountSignup">Already have an account</string>
     <string name="registerLinkSignup">Register</string>
+
+
+
+    <!--FireBase-->
+    <string name="client_id">723960825861-lpq8b9ul5p3opgga3652oiud2afvdtmt.apps.googleusercontent.com</string>
+
+
 </resources>

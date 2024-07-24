@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/haveAnAccountSignup"
+                    android:id="@+id/tvAlrHvAcc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -100,7 +100,7 @@
                 android:layout_height="10dp"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/registerBtnSignup"
+                android:id="@+id/btnSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:text="@string/registerLinkSignup"
