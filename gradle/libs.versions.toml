@@ -1,11 +1,10 @@
 [versions]
 agp = "8.5.0"
-credentials = "1.2.2"
-credentialsPlayServicesAuth = "1.5.0-alpha03"
-credentialsVersion = "1.2.2"
+
+
 firebaseBom = "33.1.2"
 glide = "4.16.0"
-googleid = "1.1.1"
+
 junit = "4.13.2"
 junitVersion = "1.2.0"
 espressoCore = "3.6.0"
@@ -16,16 +15,13 @@ constraintlayout = "2.1.4"
 googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.0.0"
 playServicesAuth = "21.2.0"
-repo = "Tag"
+
 
 [libraries]
-credentials = { module = "androidx.credentials:credentials", version.ref = "credentialsPlayServicesAuth" }
-credentials-play-services-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentialsPlayServicesAuth" }
-credentials-play-services-auth-v122 = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentials" }
-credentials-v122 = { module = "androidx.credentials:credentials", version.ref = "credentialsVersion" }
+
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
-googleid = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }
+
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -35,7 +31,7 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
-repo = { module = "com.github.User:Repo", version.ref = "repo" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

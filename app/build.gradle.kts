@@ -45,14 +45,9 @@ dependencies {
     implementation (libs.glide)
     implementation(libs.play.services.auth)
     implementation(platform(libs.firebase.bom))
-    implementation(libs.credentials)
-    implementation(libs.credentials.play.services.auth)
-    val credentials = "1.2.2"
-    val identity = "1.1.0"
 
-    implementation(libs.credentials.v122 )
-    implementation (libs.credentials.play.services.auth.v122)
-    implementation (libs.googleid)
+
+
 
 
 

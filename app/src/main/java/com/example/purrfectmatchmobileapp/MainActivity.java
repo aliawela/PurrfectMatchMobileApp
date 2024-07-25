@@ -1,6 +1,7 @@
 package com.example.purrfectmatchmobileapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,9 +14,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-    TextView userName;
-    private final String WEB_CLIENT_API = "723960825861-lpq8b9ul5p3opgga3652oiud2afvdtmt.apps.googleusercontent.com";
-    @Override
+
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
+
         Button introBtn = findViewById(R.id.introButton);
         introBtn.setOnClickListener(new View.OnClickListener() {
             @Override

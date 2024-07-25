@@ -14,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -23,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 
 public class Settings extends AppCompatActivity {
     TextView nameSettings;
+    ImageView ivBackToHome;
     GoogleSignInClient googleSignInClient;
     GoogleSignInOptions googleSignInOptions;
     @Override
@@ -48,11 +50,19 @@ public class Settings extends AppCompatActivity {
         GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if(googleSignInAccount != null){
             String gName = googleSignInAccount.getDisplayName();
-            profileImageSettings.setImageURI(googleSignInAccount.getPhotoUrl());
+            Glide.with(Settings.this).load(googleSignInAccount.getPhotoUrl()).into(profileImageSettings);
+
             nameSettings.setText(gName);
         }
 
+        ivBackToHome = findViewById(R.id.ivBackToHome);
 
+        ivBackToHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Settings.this,DashboardActivity.class));
+            }
+        });
         signInSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
