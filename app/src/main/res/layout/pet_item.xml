@@ -7,7 +7,7 @@
     android:layout_margin="8dp">
 
     <ImageView
-        android:id="@+id/petImage"
+        android:id="@+id/ivPetImage"
         android:layout_width="164dp"
         android:layout_height="164dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,7 +16,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/ivAddToFav"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
@@ -34,7 +34,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/petImage" />
+        app:layout_constraintTop_toBottomOf="@+id/ivPetImage" />
 
     <TextView
         android:id="@+id/petType"

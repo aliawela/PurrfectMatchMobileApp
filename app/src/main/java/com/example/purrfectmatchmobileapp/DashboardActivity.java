@@ -47,6 +47,8 @@ public class DashboardActivity extends AppCompatActivity {
                 Intent intent = null;
                 if (item.getItemId() == R.id.navProfile) {
                     intent = new Intent(DashboardActivity.this, Settings.class);
+                } else if (item.getItemId() == R.id.navSearch ){
+                    intent = new Intent(DashboardActivity.this, FilterPets.class);
                 }
                 if (intent != null) {
                     startActivity(intent);
