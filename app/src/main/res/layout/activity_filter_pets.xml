@@ -16,91 +16,122 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/backFilterPage"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/background_oval_1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/ivBackToHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/back" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <TextView
-            android:id="@+id/textView41"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="15dp"
-            android:text="@string/descriptionFilterPets"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/searchFilterPet"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/edittext_background"
-            android:drawableStart="@drawable/search"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="@string/searchBarHintFilterPets"
-            android:inputType="text"
-            android:padding="16dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/backFilterPage"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/background_oval_1">
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_weight="1"
-            android:text="@string/categoriesFilterPets"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/ivBackToHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/back" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <EditText
+                android:id="@+id/searchFilterPet"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_background"
+                android:drawableStart="@drawable/search"
+                android:drawablePadding="16dp"
+                android:ems="10"
+                android:hint="@string/searchBarHintFilterPets"
+                android:inputType="text"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:backgroundTint="@color/light_blue"
             android:orientation="horizontal">
-
-
             <LinearLayout
-                android:id="@+id/dogsFilterPage"
+                android:id="@+id/allFilterPage"
+                android:layout_marginStart="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="22dp"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
-                    android:layout_margin="16dp"
+
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="16dp"
+
+
+                    android:background="@drawable/background_oval_2">
+
+                    <ImageView
+                        android:id="@+id/allIconCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/btn_1" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/txtallCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/allFilterPet"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/dogsFilterPage"
+                android:layout_width="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@drawable/background_oval_2">
 
                     <ImageView
@@ -128,15 +159,20 @@
             <LinearLayout
                 android:id="@+id/catsFilterPage"
                 android:layout_width="match_parent"
+                android:layout_marginStart="5dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="40dp"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
-                    android:layout_margin="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@drawable/background_oval_2">
 
                     <ImageView
@@ -163,16 +199,21 @@
 
             <LinearLayout
                 android:id="@+id/othersFilterPage"
+                android:layout_marginStart="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="40dp"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
-                    android:layout_margin="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@drawable/background_oval_2">
 
                     <ImageView
@@ -197,7 +238,9 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+
         </LinearLayout>
+
 
     </LinearLayout>
 
