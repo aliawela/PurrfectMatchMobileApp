@@ -19,6 +19,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+
+import java.util.Objects;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -42,41 +46,47 @@ public class SignupActivity extends AppCompatActivity {
         txtPasswordSignup = findViewById(R.id.txtPasswordSignup);
         btnSignup = findViewById(R.id.btnSignUp);
         tvAlrHvAcc = findViewById(R.id.tvAlrHvAcc);
+        btnSignup.setOnClickListener(this::onSignupClicked);
+        tvAlrHvAcc.setOnClickListener(this::onAlreadyHaveAccountClicked);
+    }
 
-        btnSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String user = txtEmailSignup.getText().toString().trim();
-                String password = txtPasswordSignup.getText().toString().trim();
 
-                if (user.isEmpty()){
-                    txtEmailSignup.setError("Email can't be empty");
-                }
-                if(password.isEmpty()){
-                    txtPasswordSignup.setError("Password can't be empty");
-                }
+    private void onSignupClicked(View view) {
+        String email = txtEmailSignup.getText().toString().trim();
+        String password = txtPasswordSignup.getText().toString().trim();
 
-                if(!user.isEmpty() && !password.isEmpty()){
-                    auth.createUserWithEmailAndPassword(user,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(SignupActivity.this,"SignUp Successful",Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-                            }else{
-                                Toast.makeText(SignupActivity.this,"SignUp Failed",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
-            }
-        });
+        if (email.isEmpty()) {
+            txtEmailSignup.setError("Email can't be empty");
+            return; // Stop further execution if email is empty
+        }
 
-        tvAlrHvAcc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-            }
-        });
+        if (password.isEmpty()) {
+            txtPasswordSignup.setError("Password can't be empty");
+            return; // Stop further execution if password is empty
+        }
+
+        auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        updateUserProfile();
+                        Toast.makeText(SignupActivity.this, "SignUp Successful", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                    } else {
+                        Toast.makeText(SignupActivity.this, "SignUp Failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void updateUserProfile() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();if (user != null) {
+            UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(txtUsernameSignup.getText().toString().trim())
+                    .build();
+            user.updateProfile(request);
+        }
+    }
+
+    private void onAlreadyHaveAccountClicked(View view) {
+        startActivity(new Intent(SignupActivity.this, LoginActivity.class));
     }
 }

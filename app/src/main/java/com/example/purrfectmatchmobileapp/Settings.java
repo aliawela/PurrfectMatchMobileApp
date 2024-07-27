@@ -21,12 +21,22 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Settings extends AppCompatActivity {
     TextView nameSettings;
-    ImageView ivBackToHome;
-    GoogleSignInClient googleSignInClient;
-    GoogleSignInOptions googleSignInOptions;
+    ImageView ivBackToHome,profileImageSettings;
+    RelativeLayout signInSettings,signUpSettings,logoutSettings;
+    FirebaseAuth auth;
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        getNameAndPhoto();
+        updateUiBasedOnLoginStatus();
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,55 +48,62 @@ public class Settings extends AppCompatActivity {
             return insets;
         });
 
-        RelativeLayout signInSettings = findViewById(R.id.signInSettings);
-        RelativeLayout signUpSettings = findViewById(R.id.signUpSettings);
-        RelativeLayout logoutSettings = findViewById(R.id.logoutSettingLayout);
-        ImageView profileImageSettings = findViewById(R.id.profileImageSettings);
+        signInSettings = findViewById(R.id.signInSettings);
+        signUpSettings = findViewById(R.id.signUpSettings);
+        logoutSettings = findViewById(R.id.logoutSettingLayout);
+        profileImageSettings = findViewById(R.id.profileImageSettings);
         nameSettings = findViewById(R.id.nameSettings);
-
-        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        googleSignInClient = GoogleSignIn.getClient(this,googleSignInOptions);
-
-        GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
-        if(googleSignInAccount != null){
-            String gName = googleSignInAccount.getDisplayName();
-            Glide.with(Settings.this).load(googleSignInAccount.getPhotoUrl()).into(profileImageSettings);
-
-            nameSettings.setText(gName);
-        }
-
+        auth = FirebaseAuth.getInstance();
         ivBackToHome = findViewById(R.id.ivBackToHome);
-
-        ivBackToHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Settings.this,DashboardActivity.class));
-            }
-        });
-        signInSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Settings.this, LoginActivity.class));
-            }
-        });
-        signUpSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Settings.this, SignupActivity.class));
-            }
-        });
-        logoutSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                googleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        finish();
-                        startActivity(new Intent(Settings.this,LoginActivity.class));
-                    }
-                });
-            }
-        });
+        setupClickListeners();
+        getNameAndPhoto();
+        updateUiBasedOnLoginStatus();
 
     }
+    public void getNameAndPhoto() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() != null) {
+            String gName = auth.getCurrentUser().getDisplayName();
+            Glide.with(Settings.this).load(auth.getCurrentUser().getPhotoUrl()).into(profileImageSettings);
+            nameSettings.setText(gName);
+        }else{
+            profileImageSettings.setImageResource(R.drawable.user_1);
+            nameSettings.setText(R.string.nameProfile);
+        }
+    }
+
+    private void setupClickListeners() {
+        ivBackToHome.setOnClickListener(this::onBackToHomeClicked);
+        signInSettings.setOnClickListener(this::onSignInClicked);
+        signUpSettings.setOnClickListener(this::onSignUpClicked);
+        logoutSettings.setOnClickListener(this::onLogoutClicked);
+    }
+
+    private void onBackToHomeClicked(View view) {
+        startActivity(new Intent(Settings.this, DashboardActivity.class));
+    }
+
+    private void onSignInClicked(View view) {
+        startActivity(new Intent(Settings.this, LoginActivity.class));
+    }
+
+    private void onSignUpClicked(View view) {
+        startActivity(new Intent(Settings.this, SignupActivity.class));
+    }
+
+    private void onLogoutClicked(View view) {
+        auth.signOut();
+        startActivity(new Intent(Settings.this, MainActivity.class));
+    }
+
+
+    private void updateUiBasedOnLoginStatus() {
+        boolean isLoggedIn = auth.getCurrentUser() != null;
+
+        signInSettings.setVisibility(isLoggedIn ? View.GONE : View.VISIBLE);
+        signUpSettings.setVisibility(isLoggedIn ? View.GONE : View.VISIBLE);
+        logoutSettings.setVisibility(isLoggedIn ? View.VISIBLE : View.GONE);
+    }
+
+
 }

@@ -94,60 +94,54 @@ public class LoginActivity extends AppCompatActivity {
         tvDntHvAcc = findViewById(R.id.tvDntHvAcc);
         ivGoogleLogin = findViewById(R.id.ivGoogleLogin);
         FirebaseApp.initializeApp(this);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = txtEmailLogin.getText().toString().trim();
-                String password = txtPasswordLogin.getText().toString().trim();
 
-                if(!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    if(!password.isEmpty() ){
-                        auth.signInWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                            @Override
-                            public void onSuccess(AuthResult authResult) {
-                                Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                                finish();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(LoginActivity.this,"Login Failed",Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }else{
-                        txtPasswordLogin.setError("Password can't be empty");
-                    }
-                }else if(email.isEmpty()) {
-                    txtEmailLogin.setError("Email can't be empty");
-                }else{
-                    txtEmailLogin.setError("Please enter valid email");
-                }
-            }
-        });
-
-        tvDntHvAcc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this,SignupActivity.class));
-            }
-        });
-
-    googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.client_id))
-            .requestEmail()
-            .build();
-    googleSignInClient = GoogleSignIn.getClient(LoginActivity.this,googleSignInOptions);
-    GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        btnLogin.setOnClickListener(this::onEmailLoginClicked);
+        tvDntHvAcc.setOnClickListener(this::onDontHaveAccountClicked);
+        ivGoogleLogin.setOnClickListener(this::onGoogleLoginClicked);
 
 
-    ivGoogleLogin.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent signInIntent = googleSignInClient.getSignInIntent();
-            activityResultLauncher.launch(signInIntent);
+
+    }
+    private void onEmailLoginClicked(View view) {
+        String email = txtEmailLogin.getText().toString().trim();
+        String password = txtPasswordLogin.getText().toString().trim();
+
+        if (email.isEmpty()) {
+            txtEmailLogin.setError("Email can't be empty");
+            return;
         }
-    });
 
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            txtEmailLogin.setError("Please enter a valid email");
+            return;
+        }
+
+        if (password.isEmpty()) {
+            txtPasswordLogin.setError("Password can't be empty");
+            return;
+        }
+
+        auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
+                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish(); // Optional: Close the login activity after successful login
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void onDontHaveAccountClicked(View view) {
+        startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+    }
+
+    private void onGoogleLoginClicked(View view) {
+        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.client_id))
+                .requestEmail()
+                .build();
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        activityResultLauncher.launch(signInIntent);
     }
 }

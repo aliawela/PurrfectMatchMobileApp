@@ -1,10 +1,11 @@
 package com.example.purrfectmatchmobileapp;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.os.Bundle;
+
 import android.view.MenuItem;
-import android.widget.FrameLayout;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,14 +17,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.Objects;
 
 public class DashboardActivity extends AppCompatActivity {
     TextView txtUserName;
@@ -69,15 +67,15 @@ public class DashboardActivity extends AppCompatActivity {
         getNameAndPhoto();
     }
 
-    public void getNameAndPhoto(){
-        GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(DashboardActivity.this);
-        if(googleSignInAccount != null){
-            String gName = googleSignInAccount.getDisplayName();
-            Glide.with(DashboardActivity.this).load(googleSignInAccount.getPhotoUrl()).into(ivUserPhoto);
+    public void getNameAndPhoto() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() != null) {
+            String gName = auth.getCurrentUser().getDisplayName();
+            Glide.with(DashboardActivity.this).load(auth.getCurrentUser().getPhotoUrl()).into(ivUserPhoto);
             txtUserName.setText(gName);
         }else{
-            ivUserPhoto.setImageResource(R.drawable.user_1);
-            txtUserName.setText(R.string.nameProfile);
-        }
+                ivUserPhoto.setImageResource(R.drawable.user_1);
+                txtUserName.setText(R.string.nameProfile);
+            }
     }
 }
