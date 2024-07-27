@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".DashboardActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/dark_blue"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,11 +69,12 @@
             android:layout_marginBottom="8dp"
             android:backgroundTint="@color/light_blue"
             android:orientation="horizontal">
+
             <LinearLayout
                 android:id="@+id/allFilterPage"
-                android:layout_marginStart="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -82,11 +83,11 @@
                     android:layout_gravity="center"
 
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="5dp"
-                    android:layout_marginEnd="16dp"
 
 
                     android:background="@drawable/background_oval_2">
@@ -114,12 +115,11 @@
             </LinearLayout>
 
 
-
             <LinearLayout
                 android:id="@+id/dogsFilterPage"
                 android:layout_width="match_parent"
-                android:layout_marginStart="5dp"
                 android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -127,11 +127,11 @@
                     android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="5dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/background_oval_2">
 
                     <ImageView
@@ -159,8 +159,8 @@
             <LinearLayout
                 android:id="@+id/catsFilterPage"
                 android:layout_width="match_parent"
-                android:layout_marginStart="5dp"
                 android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -168,11 +168,11 @@
                     android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="5dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/background_oval_2">
 
                     <ImageView
@@ -199,9 +199,9 @@
 
             <LinearLayout
                 android:id="@+id/othersFilterPage"
-                android:layout_marginStart="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -209,11 +209,11 @@
                     android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="5dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/background_oval_2">
 
                     <ImageView
@@ -245,9 +245,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="413dp"
-        android:layout_height="294dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
