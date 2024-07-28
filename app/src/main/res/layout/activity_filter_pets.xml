@@ -40,10 +40,10 @@
                     app:srcCompat="@drawable/back" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <EditText
+            <android.widget.SearchView
                 android:id="@+id/searchFilterPet"
                 android:layout_width="293dp"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="32dp"

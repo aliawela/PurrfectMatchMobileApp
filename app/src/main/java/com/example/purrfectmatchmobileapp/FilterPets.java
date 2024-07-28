@@ -2,6 +2,7 @@ package com.example.purrfectmatchmobileapp;
 
 import android.os.Bundle;
 import android.util.Log;import android.widget.LinearLayout;
+import android.widget.SearchView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -20,7 +21,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class FilterPets extends AppCompatActivity {
 
@@ -35,6 +39,7 @@ public class FilterPets extends AppCompatActivity {
     private ValueEventListener valueEventListener;
     private boolean isLoading = false;
     private String currentFilter = null;
+    private List<Pet> allPetsCache = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +85,22 @@ public class FilterPets extends AppCompatActivity {
                 }
             }
         });
+
+
+        SearchView searchView = findViewById(R.id.searchFilterPet);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                performSearch(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                performSearch(newText);
+                return true;
+            }
+        });
     }
 
     private void initializeFilterButtons() {
@@ -88,9 +109,9 @@ public class FilterPets extends AppCompatActivity {
         LinearLayout othersFilterPage = findViewById(R.id.othersFilterPage);
         LinearLayout allFilterPage = findViewById(R.id.allFilterPage);
 
-        dogFilterPage.setOnClickListener(view -> applyFilter("Dog"));
-        catFilterPage.setOnClickListener(view -> applyFilter("Cat"));
-        othersFilterPage.setOnClickListener(view -> applyFilter("Other"));
+        dogFilterPage.setOnClickListener(view -> applyFilter("Dogs"));
+        catFilterPage.setOnClickListener(view -> applyFilter("Cats"));
+        othersFilterPage.setOnClickListener(view -> applyFilter("Others"));
         allFilterPage.setOnClickListener(view -> applyFilter(null));
     }
 
@@ -106,71 +127,63 @@ public class FilterPets extends AppCompatActivity {
         fetchFirstPage(filter);
     }
 
+
     private void fetchFirstPage(String petTypeToFilter) {
         isLoading = true;
         Query query;
         if (petTypeToFilter == null) {
-            query = petRef.orderByKey().limitToFirst(PAGE_SIZE);
+            query = petRef.child("All").orderByKey().limitToFirst(PAGE_SIZE);
         } else {
-
-            query = petRef.orderByChild("pet_type")
-                    .startAt(petTypeToFilter)
-                    .endAt(petTypeToFilter + "\uf8ff")
-                    .limitToFirst(PAGE_SIZE);
+            query = petRef.child(petTypeToFilter).orderByKey().limitToFirst(PAGE_SIZE);
         }
         Log.d(TAG, "Fetching first page with filter: " + petTypeToFilter);
-        handleFetch(query);
+        handleFetch(query, true);
     }
 
-    private void fetchNextPage(String petTypeToFilter) {
-        if (lastKey != null && !isLoading) {
-            isLoading = true;
-            Query query;
-            if (petTypeToFilter == null) {
-                query = petRef.orderByKey().startAfter(lastKey).limitToFirst(PAGE_SIZE);
-            } else {
-                // Filter within the paginated results using endAt
-                query = petRef.orderByChild("pet_type")
-                        .startAfter(lastKey)
-                        .endAt(petTypeToFilter + "\uf8ff") // Keep the filter
-                        .limitToFirst(PAGE_SIZE);
-            }
-
-            handleFetch(query);
+    private void fetchNextPage(String petTypeToFilter) {if (lastKey != null && !isLoading) {
+        isLoading = true;
+        Query query;
+        if (petTypeToFilter == null) {
+            query = petRef.child("All").orderByKey().startAfter(lastKey).limitToFirst(PAGE_SIZE);
+        } else {
+            query = petRef.child(petTypeToFilter).orderByKey().startAfter(lastKey).limitToFirst(PAGE_SIZE);
         }
+        Log.d(TAG, "Fetching next page with filter: " + petTypeToFilter);
+        handleFetch(query, false);
+    }
     }
 
-    private void handleFetch(Query query) {
-        detachListener(); // Detach any previous listener
+    private void handleFetch(Query query, boolean isFirstPage) {
+        detachListener();
 
         valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (lastKey == null) { // Clear list only for the first page
+                if (isFirstPage) {
                     petList.clear();
                 }
                 for (DataSnapshot petSnapshot : snapshot.getChildren()) {
                     Pet pet = petSnapshot.getValue(Pet.class);
                     if (pet != null) {
-
                         petList.add(pet);
                         lastKey = petSnapshot.getKey();
                     }
                 }
+
                 petAdapter.notifyDataSetChanged();
                 isLoading = false;
                 Log.d(TAG, "Data fetched: " + petList.size() + " pets");
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {Log.e(TAG, "Error fetching data: " + error.getMessage());
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, "Error fetching data: " + error.getMessage());
                 isLoading = false;
             }
         };
 
         query.addValueEventListener(valueEventListener);
     }
-
     private void detachListener() {
         if (valueEventListener != null) {
             petRef.removeEventListener(valueEventListener);
@@ -182,5 +195,22 @@ public class FilterPets extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         detachListener(); // Detach listener when the activity is destroyed
+    }
+
+    private void performSearch(String query) {
+        List<Pet> filteredList = new ArrayList<>();
+        if (query.isEmpty() || query == null) {
+            fetchFirstPage(currentFilter); // Show all pets if query is empty
+        } else {
+            query = query.toLowerCase();
+            for (Pet pet : petList) {
+                if (pet.getName().toLowerCase().contains(query) ||
+                        pet.getPet_type().toLowerCase().contains(query)) {
+                    filteredList.add(pet);
+                }
+            }
+            petAdapter.updatePetList(filteredList);
+        }
+
     }
 }

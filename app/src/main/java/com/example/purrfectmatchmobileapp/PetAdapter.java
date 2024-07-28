@@ -67,4 +67,9 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
     public interface OnItemClickListener {
         void onItemClick(Pet pet);
     }
+    public void updatePetList(List<Pet> newPetList) {
+        petList.clear();
+        petList.addAll(newPetList);
+        notifyDataSetChanged();
+    }
 }

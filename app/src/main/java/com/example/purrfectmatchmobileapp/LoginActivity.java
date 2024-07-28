@@ -1,7 +1,9 @@
 package com.example.purrfectmatchmobileapp;
 
-import android.app.Activity;
+
+import android.content.Context;
 import android.content.Intent;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -22,16 +24,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKeys;
 
-import com.bumptech.glide.Glide;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
@@ -39,7 +42,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.Objects;
+
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
@@ -123,8 +129,9 @@ public class LoginActivity extends AppCompatActivity {
 
         auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    storeCredentials(this, email, password, "email");
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    finish(); // Optional: Close the login activity after successful login
+                    finish();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
@@ -143,5 +150,32 @@ public class LoginActivity extends AppCompatActivity {
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
         Intent signInIntent = googleSignInClient.getSignInIntent();
         activityResultLauncher.launch(signInIntent);
+        storeCredentials(this, Objects.requireNonNull(auth.getCurrentUser()).getEmail(), null, "google");
     }
+
+    private void storeCredentials(Context context, String email, String password, String loginMethod) {
+        try {
+            String masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC);
+            SharedPreferences sharedPreferences = EncryptedSharedPreferences.create(
+                    "user_creds",
+                    masterKeyAlias,
+                    context,
+                    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            );
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("email", email);
+            if (loginMethod.equals("email")) {
+                editor.putString("password", password);
+            }
+            editor.putString("login_method", loginMethod);
+            editor.apply();
+        } catch (GeneralSecurityException | IOException e) {
+            // Handle exceptions appropriately
+            e.printStackTrace();
+        }
+    }
+
+
 }
