@@ -1,5 +1,7 @@
 package com.example.purrfectmatchmobileapp;
 
+import static com.example.purrfectmatchmobileapp.ColumnCalculator.calculateNoOfColumns;
+
 import android.content.Context;
 import android.content.Intent;
 
@@ -19,6 +21,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKeys;
 
@@ -31,15 +35,32 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 public class DashboardActivity extends AppCompatActivity {
@@ -49,6 +70,8 @@ public class DashboardActivity extends AppCompatActivity {
     GoogleSignInOptions googleSignInOptions;
     GoogleSignInClient googleSignInClient;
     private static final String TAG = "DashboardActivity";
+    private PetAdapter dashboardPetAdapter;
+    DatabaseReference petRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +83,7 @@ public class DashboardActivity extends AppCompatActivity {
             return insets;
         });
         auth = FirebaseAuth.getInstance();
+        petRef = FirebaseDatabase.getInstance().getReference("Pets");
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.client_id))
                 .requestEmail()
@@ -92,12 +116,51 @@ public class DashboardActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             // Default action, if needed
         }
+
+        RecyclerView recyclerViewDashboard = findViewById(R.id.recyclerDashBoard);
+
+        // Calculate span count based on available width
+        int noOfColumns = calculateNoOfColumns(this, 180f);
+        GridLayoutManager layoutManagerDashboard = new GridLayoutManager(this, noOfColumns);
+        recyclerViewDashboard.setLayoutManager(layoutManagerDashboard);
+
+        dashboardPetAdapter = new PetAdapter(new ArrayList<>(), pet -> {
+            // Handle pet item click here (e.g., open details activity)
+        });
+        recyclerViewDashboard.setAdapter(dashboardPetAdapter);
+
+        fetchRandomPetsForDashboard();
     }
 
+    private void fetchRandomPetsForDashboard() {
+        Query query = petRef.child("All").orderByKey().limitToFirst(4); // Fetch 4 random pets from "All"
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Pet> randomPets = new ArrayList<>();
+                for (DataSnapshot petSnapshot : snapshot.getChildren()) {
+                    Pet pet = petSnapshot.getValue(Pet.class);
+                    if (pet != null) {
+                        randomPets.add(pet);
+                    }
+                }
+                Collections.shuffle(randomPets); // Shuffle for randomness
+                dashboardPetAdapter.updatePetList(randomPets); // Assuming you have a dashboardPetAdapter
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("DashboardActivity", "Error fetching random pets: " + error.getMessage());
+                // Handle the error appropriately (e.g.,show a Toast message)
+            }
+        });
+    }
     @Override
     protected void onRestart() {
         super.onRestart();
         getNameAndPhoto();
+        fetchRandomPetsForDashboard();
     }
 
     public void getNameAndPhoto() {

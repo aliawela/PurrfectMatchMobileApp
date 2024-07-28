@@ -17,6 +17,7 @@ firebaseAuth = "23.0.0"
 playServicesAuth = "21.2.0"
 firebaseDatabase = "21.0.0"
 securityCrypto = "1.0.0"
+firebaseFirestore = "25.0.0"
 
 
 [libraries]
@@ -35,6 +36,7 @@ firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 security-crypto = { group = "androidx.security", name = "security-crypto", version.ref = "securityCrypto" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 
 
 [plugins]

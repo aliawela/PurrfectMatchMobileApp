@@ -55,32 +55,38 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tvDntHvAcc;
     GoogleSignInOptions googleSignInOptions;
     GoogleSignInClient googleSignInClient;
-    private final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-        @Override
-        public void onActivityResult(ActivityResult result) {
-            if (result.getResultCode() == RESULT_OK) {
-                Task<GoogleSignInAccount> accountTask = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
-                try {
-                    GoogleSignInAccount signInAccount = accountTask.getResult(ApiException.class);
-                    AuthCredential authCredential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
-                    auth.signInWithCredential(authCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                auth = FirebaseAuth.getInstance();
-                                Toast.makeText(LoginActivity.this, "Signed in successfully!", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(LoginActivity.this, Settings.class));
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Failed to sign in: " + task.getException(), Toast.LENGTH_SHORT).show();
-                            }
+    private final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK) {
+                        Task<GoogleSignInAccount> accountTask = GoogleSignIn.getSignedInAccountFromIntent(result.getData());try {
+                            GoogleSignInAccount signInAccount = accountTask.getResult(ApiException.class);
+                            AuthCredential authCredential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
+                            auth.signInWithCredential(authCredential)
+                                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (task.isSuccessful()) {
+                                                auth = FirebaseAuth.getInstance();
+                                                Toast.makeText(LoginActivity.this, "Signed in successfully!", Toast.LENGTH_SHORT).show();// Store credentials after successful sign-in
+                                                if (auth.getCurrentUser() != null) {
+                                                    storeCredentials(LoginActivity.this, auth.getCurrentUser().getEmail(), null, "google");
+                                                }
+
+                                                startActivity(new Intent(LoginActivity.this, Settings.class));
+                                            } else {
+                                                Toast.makeText(LoginActivity.this, "Failed to sign in: " + task.getException(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                        } catch (ApiException e) {
+                            e.printStackTrace();
                         }
-                    });
-                } catch (ApiException e) {
-                    e.printStackTrace();
+                    }
                 }
             }
-        }
-    });
+    );
 
 
     @Override
@@ -150,8 +156,7 @@ public class LoginActivity extends AppCompatActivity {
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
         Intent signInIntent = googleSignInClient.getSignInIntent();
         activityResultLauncher.launch(signInIntent);
-        storeCredentials(this, Objects.requireNonNull(auth.getCurrentUser()).getEmail(), null, "google");
-    }
+ }
 
     private void storeCredentials(Context context, String email, String password, String loginMethod) {
         try {
