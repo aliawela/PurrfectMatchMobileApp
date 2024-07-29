@@ -35,6 +35,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
     public void onBindViewHolder(@NonNull PetViewHolder holder, int position) {
         Pet pet = petList.get(position);
         holder.nameTextView.setText(pet.getName());
+        holder.petType.setText(pet.getPet_type());
         Glide.with(holder.itemView.getContext()).load(pet.getImgUrl()).into(holder.imageView);
 
 
@@ -53,12 +54,14 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
     public static class PetViewHolder extends RecyclerView.ViewHolder {
         public TextView nameTextView;
         public ImageView imageView;
+        public TextView petType;
         // ... other views
 
         public PetViewHolder(View itemView) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.petName);
             imageView = itemView.findViewById(R.id.ivPetImage);
+            petType = itemView.findViewById(R.id.petType);
             // ... find other views
         }
     }

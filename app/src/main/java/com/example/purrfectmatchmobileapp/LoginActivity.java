@@ -69,11 +69,14 @@ public class LoginActivity extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<AuthResult> task) {
                                             if (task.isSuccessful()) {
                                                 auth = FirebaseAuth.getInstance();
-                                                Toast.makeText(LoginActivity.this, "Signed in successfully!", Toast.LENGTH_SHORT).show();// Store credentials after successful sign-in
+                                                Toast.makeText(LoginActivity.this, "Signed in successfully!", Toast.LENGTH_SHORT).show();
+
+                                                // Store credentials after successful sign-in
                                                 if (auth.getCurrentUser() != null) {
                                                     storeCredentials(LoginActivity.this, auth.getCurrentUser().getEmail(), null, "google");
                                                 }
 
+                                                // Move startActivity here, inside the onSuccess block
                                                 startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                                             } else {
                                                 Toast.makeText(LoginActivity.this, "Failed to sign in: " + task.getException(), Toast.LENGTH_SHORT).show();
