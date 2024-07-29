@@ -17,6 +17,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -39,10 +41,14 @@ import java.util.Locale;
 
 public class Settings extends AppCompatActivity {
     TextView nameSettings;
+    SwitchCompat nightModeSwitch;
     ImageView profileImageSettings;
     ConstraintLayout ivBackToHome;
     RelativeLayout signInSettings, signUpSettings, logoutSettings,aboutusSettings ,languagesSettings;
     FirebaseAuth auth;
+    boolean isNightMode;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onRestart() {
@@ -77,10 +83,33 @@ public class Settings extends AppCompatActivity {
         nameSettings = findViewById(R.id.nameSettings);
         auth = FirebaseAuth.getInstance();
         ivBackToHome = findViewById(R.id.ivBackToHome);
+        nightModeSwitch = findViewById(R.id.nightModeSwitch);
+        sharedPreferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        isNightMode = sharedPreferences.getBoolean("nightMode",false);
+        if(isNightMode){
+            nightModeSwitch.setChecked(true);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        nightModeSwitch.setOnClickListener(view -> {
+            myTheme();
+        });
         setupClickListeners();
         getNameAndPhoto();
         updateUiBasedOnLoginStatus();
 
+    }
+
+    private void myTheme() {
+        if(isNightMode){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            editor.putBoolean("nightMode",false);
+
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            editor.putBoolean("nightMode",true);
+        }
+        editor.apply();
     }
 
 

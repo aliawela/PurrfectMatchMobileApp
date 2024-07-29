@@ -2,10 +2,12 @@ package com.example.purrfectmatchmobileapp;
 
 import static com.example.purrfectmatchmobileapp.ColumnCalculator.calculateNoOfColumns;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -61,6 +64,7 @@ import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 
 public class DashboardActivity extends AppCompatActivity {
@@ -72,16 +76,32 @@ public class DashboardActivity extends AppCompatActivity {
     private static final String TAG = "DashboardActivity";
     private PetAdapter dashboardPetAdapter;
     DatabaseReference petRef;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    boolean isNightMode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        loadLocale();
         setContentView(R.layout.activity_dashboard);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.app_name);
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        sharedPreferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        sharedPreferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        isNightMode = sharedPreferences.getBoolean("nightMode", false);
+        if (isNightMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
         auth = FirebaseAuth.getInstance();
         petRef = FirebaseDatabase.getInstance().getReference("Pets");
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -131,6 +151,23 @@ public class DashboardActivity extends AppCompatActivity {
 
         fetchRandomPetsForDashboard();
     }
+    public void loadLocale(){
+        SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String language = prefs.getString("My_Lang","");
+        setLocale(language);
+
+    }
+    private void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE).edit();
+        editor.putString("My_Lang", lang);
+        editor.apply();
+    }
+
 
     private void fetchRandomPetsForDashboard() {
         Query query = petRef.child("All").orderByKey().limitToFirst(4); // Fetch 4 random pets from "All"
