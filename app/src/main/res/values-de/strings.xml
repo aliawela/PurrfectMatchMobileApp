@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PurrfectMatchMobileApp</string>
+    <string name="hello_blank_fragment">Hallo leeres Fragment</string>
+    <string name="greetingDashboard">Hallo, Ali</string>
+    <string name="descriptionDashboard">Finde deine Favoriten\nHier!</string>
+    <string name="searchBarHintDashboard">Suche...</string>
+    <string name="dogsDashboard">Hunde</string>
+    <string name="catsDashboard">Katzen</string>
+    <string name="othersDashboard">Andere</string>
+    <string name="trendDashboard">Trend</string>
+    <string name="view_allDashboard">Alle anzeigen</string>
+    <string name="descriptionFilterPets">Finde dein Lieblingshaustier!</string>
+    <string name="searchBarHintFilterPets">Nach Haustieren suchen</string>
+    <string name="categoriesFilterPets">Kategorien</string>
+    <string name="dogsFilterPets">Hunde</string>
+    <string name="catsFilterPets">Katzen</string>
+    <string name="othersFilterPets">Andere</string>
+    <string name="welcomeLogin">Willkommen</string>
+    <string name="textLogin">Bitte melde dich mit deinen Informationen an</string>
+    <string name="email_addressLogin">E-Mail-Adresse</string>
+    <string name="passwordLogin">Passwort</string>
+    <string name="don_t_have_an_accountLogin">Hast du kein Konto?</string>
+    <string name="i_forgot_my_passwordLogin">Ich habe mein Passwort vergessen</string>
+    <string name="loginbtnTextLogin">Anmelden</string>
+    <string name="or_login_withLogin">Oder anmelden mit</string>
+    <string name="profileTextProfile">Profil</string>
+    <string name="nameProfile">AliAwela</string>
+    <string name="emailProfile">ali123awela@gmail.com</string>
+    <string name="notificationProfile">Benachrichtigung</string>
+    <string name="calenderProfile">Kalender</string>
+    <string name="galleryProfile">Galerie</string>
+    <string name="my_favoriteProfile">Meine Favoriten</string>
+    <string name="shareProfile">Teilen</string>
+    <string name="logoutProfile">Abmelden</string>
+    <string name="settingsTextSettings">Einstellungen</string>
+    <string name="nameSettings">Ali Awela</string>
+    <string name="phoneNbSettings">+961 71 274 903</string>
+    <string name="edit_profileBtnSettings">Profil bearbeiten</string>
+    <string name="night_modeSettings">Nachtmodus</string>
+    <string name="notificationsSettings">Benachrichtigungen</string>
+    <string name="languagesSettings">Sprachen</string>
+    <string name="about_usSettings">Über uns</string>
+    <string name="sign_inSettings">Anmelden</string>
+    <string name="sign_upSettings">Registrieren</string>
+    <string name="logoutSettings">Abmelden</string>
+    <string name="welcomeSignup">Willkommen</string>
+    <string name="registerTextSignup">Bitte registriere dich mit deinen Informationen</string>
+    <string name="usernameSignup">Benutzername</string>
+    <string name="email_addressSignup">E-Mail-Adresse</string>
+    <string name="passwordSignup">Passwort</string>
+    <string name="already_have_an_accountSignup">Hast du schon ein Konto?</string>
+    <string name="registerLinkSignup">Registrieren</string>
+
+    <!--FireBase-->
+    <string name="client_id">723960825861-lpq8b9ul5p3opgga3652oiud2afvdtmt.apps.googleusercontent.com</string>
+    <string name="allFilterPet">Alle</string>
+    <string name="support_emailAboutUs">Support-E-Mail</string>
+    <string name="supportAboutUs">support@purrfectmatch.com</string>
+    <string name="supportTextAboutUs">Wenn du Hilfe benötigst oder Fragen zu PurrfectMatch hast, sind wir hier, um zu helfen! Vielen Dank, dass du PurrfectMatch gewählt hast, um deinen perfekten Haustierbegleiter zu finden. Viel Spaß beim Adoptieren! 🐾</string>
+    <string name="supportWordAboutUs">Support</string>
+    <string name="DefAboutUs">Willkommen bei PurrfectMatch - deine Lösung für die Suche nach dem perfekten pelzigen Begleiter! Ob du ein kuscheliges Kätzchen, einen verspielten Welpen oder ein treues Senior-Haustier suchst, PurrfectMatch hat alles. Unsere App verbindet Tierliebhaber mit ihren idealen Begleitern aus Tierheimen und Rettungsstationen weltweit.</string>
+    <string name="purrfect_matchAboutUs">Purrfect Match</string>
+    <string name="about_usAboutUs">Über uns</string>
+
+</resources>

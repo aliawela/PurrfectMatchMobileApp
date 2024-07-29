@@ -1,8 +1,12 @@
 package com.example.purrfectmatchmobileapp;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,7 +15,9 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -29,11 +35,13 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.Locale;
 
 public class Settings extends AppCompatActivity {
     TextView nameSettings;
-    ImageView ivBackToHome, profileImageSettings;
-    RelativeLayout signInSettings, signUpSettings, logoutSettings;
+    ImageView profileImageSettings;
+    ConstraintLayout ivBackToHome;
+    RelativeLayout signInSettings, signUpSettings, logoutSettings,aboutusSettings ,languagesSettings;
     FirebaseAuth auth;
 
     @Override
@@ -48,16 +56,23 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        loadLocale();
         setContentView(R.layout.activity_settings);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.app_name);
+        }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+
         signInSettings = findViewById(R.id.signInSettings);
+        languagesSettings = findViewById(R.id.languagesSettings);
         signUpSettings = findViewById(R.id.signUpSettings);
         logoutSettings = findViewById(R.id.logoutSettingLayout);
+        aboutusSettings = findViewById(R.id.aboutusSettings);
         profileImageSettings = findViewById(R.id.profileImageSettings);
         nameSettings = findViewById(R.id.nameSettings);
         auth = FirebaseAuth.getInstance();
@@ -67,6 +82,7 @@ public class Settings extends AppCompatActivity {
         updateUiBasedOnLoginStatus();
 
     }
+
 
     public void getNameAndPhoto() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -82,13 +98,65 @@ public class Settings extends AppCompatActivity {
 
     private void setupClickListeners() {
         ivBackToHome.setOnClickListener(this::onBackToHomeClicked);
+        languagesSettings.setOnClickListener(this::changeLang);
+        aboutusSettings.setOnClickListener(this::onAboutUsClicked);
         signInSettings.setOnClickListener(this::onSignInClicked);
         signUpSettings.setOnClickListener(this::onSignUpClicked);
         logoutSettings.setOnClickListener(this::onLogoutClicked);
     }
+    private void changeLang(View view){
+        showChangeLanguageDialog();
+    }
+
+    private void showChangeLanguageDialog() {
+        final String[] listItems = {"English","French", "German"};
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Settings.this);
+        mBuilder.setTitle("Choose Language...");
+        mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if(i==0){
+                    setLocale("en");
+                    recreate();
+                }
+                else if(i==1){
+                    setLocale("fr");
+                    recreate();
+                }
+                else if(i==2){
+                    setLocale("de");
+                    recreate();
+                }
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog mDialog = mBuilder.create();
+        mDialog.show();
+
+    }
+
+    private void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        SharedPreferences.Editor editor = getSharedPreferences("Settings",MODE_PRIVATE).edit();
+        editor.putString("My_Lang",lang);
+        editor.apply();
+    }
+    public void loadLocale(){
+        SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String language = prefs.getString("My_Lang","");
+        setLocale(language);
+
+    }
 
     private void onBackToHomeClicked(View view) {
         startActivity(new Intent(Settings.this, DashboardActivity.class));
+    }
+    private void onAboutUsClicked(View view) {
+        startActivity(new Intent(Settings.this, AboutUsActivity.class));
     }
 
     private void onSignInClicked(View view) {
@@ -105,7 +173,7 @@ public class Settings extends AppCompatActivity {
 
         // Clear stored credentials
         clearCredentials(this);
-        startActivity(new Intent(Settings.this, MainActivity.class));
+        startActivity(new Intent(Settings.this, DashboardActivity.class));
     }
 
 

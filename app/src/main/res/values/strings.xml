@@ -56,6 +56,13 @@
     <!--FireBase-->
     <string name="client_id">723960825861-lpq8b9ul5p3opgga3652oiud2afvdtmt.apps.googleusercontent.com</string>
     <string name="allFilterPet">All</string>
+    <string name="support_emailAboutUs">Support Email</string>
+    <string name="supportAboutUs">support@purrfectmatch.com</string>
+    <string name="supportTextAboutUs">If you need any assistance or have any questions about PurrfectMatch. We\'re here to help! Thank you for choosing PurrfectMatch to find your perfect pet companion. Happy adopting! 🐾</string>
+    <string name="supportWordAboutUs">Support</string>
+    <string name="DefAboutUs">Welcome to PurrfectMatch - your go-to solution for finding your perfect furry companion! Whether you\'re looking for a cuddly kitten, a playful puppy, or a loyal senior pet, PurrfectMatch has you covered. Our app connects pet lovers with their ideal companions from shelters and rescues around the world.</string>
+    <string name="purrfect_matchAboutUs">Purrfect Match</string>
+    <string name="about_usAboutUs">About us</string>
 
 
 </resources>

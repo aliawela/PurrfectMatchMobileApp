@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PurrfectMatchMobileApp</string>
+    <string name="hello_blank_fragment">Bonjour fragment vide</string>
+    <string name="greetingDashboard">Salut, Ali</string>
+    <string name="descriptionDashboard">Trouvez vos favoris\nici!</string>
+    <string name="searchBarHintDashboard">Recherche...</string>
+    <string name="dogsDashboard">Chiens</string>
+    <string name="catsDashboard">Chats</string>
+    <string name="othersDashboard">Autres</string>
+    <string name="trendDashboard">Tendance</string>
+    <string name="view_allDashboard">Voir tout</string>
+    <string name="descriptionFilterPets">Trouvez votre animal préféré\n!</string>
+    <string name="searchBarHintFilterPets">Recherchez des animaux</string>
+    <string name="categoriesFilterPets">Catégories</string>
+    <string name="dogsFilterPets">Chiens</string>
+    <string name="catsFilterPets">Chats</string>
+    <string name="othersFilterPets">Autres</string>
+    <string name="welcomeLogin">Bienvenue</string>
+    <string name="textLogin">Veuillez vous connecter avec vos informations</string>
+    <string name="email_addressLogin">Adresse e-mail</string>
+    <string name="passwordLogin">Mot de passe</string>
+    <string name="don_t_have_an_accountLogin">Vous n\'avez pas de compte</string>
+    <string name="i_forgot_my_passwordLogin">J\'ai oublié mon mot de passe</string>
+    <string name="loginbtnTextLogin">Connexion</string>
+    <string name="or_login_withLogin">Ou connectez-vous avec</string>
+    <string name="profileTextProfile">Profil</string>
+    <string name="notificationProfile">Notification</string>
+    <string name="calenderProfile">Calendrier</string>
+    <string name="galleryProfile">Galerie</string>
+    <string name="my_favoriteProfile">Mes favoris</string>
+    <string name="shareProfile">Partager</string>
+    <string name="logoutProfile">Déconnexion</string>
+    <string name="settingsTextSettings">Paramètres</string>
+    <string name="phoneNbSettings">+961 71 274 903</string>
+    <string name="edit_profileBtnSettings">Modifier le profil</string>
+    <string name="night_modeSettings">Mode nuit</string>
+    <string name="notificationsSettings">Notifications</string>
+    <string name="languagesSettings">Langues</string>
+    <string name="about_usSettings">À propos de nous</string>
+    <string name="sign_inSettings">Se connecter</string>
+    <string name="sign_upSettings">S\'inscrire</string>
+    <string name="nameSettings">Ali Awela</string>
+    <string name="nameProfile">AliAwela</string>
+    <string name="emailProfile">ali123awela@gmail.com</string>
+    <string name="logoutSettings">Déconnexion</string>
+    <string name="welcomeSignup">Bienvenue</string>
+    <string name="registerTextSignup">Veuillez vous inscrire avec vos informations</string>
+    <string name="usernameSignup">Nom d\'utilisateur</string>
+    <string name="email_addressSignup">Adresse e-mail</string>
+    <string name="passwordSignup">Mot de passe</string>
+    <string name="already_have_an_accountSignup">Vous avez déjà un compte</string>
+    <string name="registerLinkSignup">S\'inscrire</string>
+
+    <!--FireBase-->
+    <string name="client_id">723960825861-lpq8b9ul5p3opgga3652oiud2afvdtmt.apps.googleusercontent.com</string>
+    <string name="allFilterPet">Tous</string>
+    <string name="support_emailAboutUs">E-mail de support</string>
+    <string name="supportAboutUs">support@purrfectmatch.com</string>
+    <string name="supportTextAboutUs">Si vous avez besoin d\'aide ou si vous avez des questions sur PurrfectMatch. Nous sommes là pour vous aider! Merci d\'avoir choisi PurrfectMatch pour trouver votre compagnon animalier idéal. Bonne adoption! 🐾</string>
+    <string name="supportWordAboutUs">Support</string>
+    <string name="DefAboutUs">Bienvenue à PurrfectMatch - votre solution incontournable pour trouver votre compagnon à fourrure idéal! Que vous recherch</string>
+    <string name="purrfect_matchAboutUs">Purrfect Match</string>
+    <string name="about_usAboutUs">à propos de nous</string>
+</resources>
