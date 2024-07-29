@@ -2,6 +2,7 @@ package com.example.purrfectmatchmobileapp;
 
 import android.content.Intent;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -51,13 +52,23 @@ public class PetInfoActivity extends AppCompatActivity {
         ImageView petImage = findViewById(R.id.petImageInfoPage);
         Pet pet = getIntent().getParcelableExtra("PET_DATA");
         Button adoptMeBtn = findViewById(R.id.adoptMeBtn);
+        TextView textView6 = findViewById(R.id.textView6); // Ensure this ID exists in your layout
+
+        // Check if night mode is enabled
+        int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+            // Change text color to white
+            petName.setTextColor(getResources().getColor(R.color.white));
+            textView6.setTextColor(getResources().getColor(R.color.white));
+        }
         if (pet != null) {
             petName.setText(pet.getName());
             about.setText(pet.toString());
+            PetGender.setText(pet.getGender());
             String fee = pet.getAdoption_fee() + "$";
             PetFee.setText(fee);
             PetType.setText(pet.getPet_type());
-            PetGender.setText(pet.getGender());
+
             Glide.with(this).load(pet.getImgUrl()).into(petImage);
         }
         adoptMeBtn.setOnClickListener(view -> {

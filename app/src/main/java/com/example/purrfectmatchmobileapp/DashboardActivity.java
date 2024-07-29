@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -71,7 +72,7 @@ import java.util.Locale;
 
 
 public class DashboardActivity extends AppCompatActivity {
-    TextView txtUserName;
+    TextView txtUserName, viewAllDashboard,textView5;
     ImageView ivUserPhoto;
     private FirebaseAuth auth;
     GoogleSignInOptions googleSignInOptions;
@@ -80,6 +81,7 @@ public class DashboardActivity extends AppCompatActivity {
     private PetAdapter dashboardPetAdapter;
     DatabaseReference petRef;
     SharedPreferences sharedPreferences;
+
     SharedPreferences.Editor editor;
     boolean isNightMode;
     @Override
@@ -114,10 +116,18 @@ public class DashboardActivity extends AppCompatActivity {
                 .build();
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
+
         checkForCredentials(this);
         txtUserName = findViewById(R.id.nameDashboard);
         ivUserPhoto = findViewById(R.id.profileImageDashboard);
+        viewAllDashboard = findViewById(R.id.viewAllDashboard);
+        textView5 = findViewById(R.id.textView5);
+
         getNameAndPhoto();
+        if (isNightMode) {
+            textView5.setTextColor(getResources().getColor(android.R.color.white));
+            viewAllDashboard.setTextColor(getResources().getColor(android.R.color.white));
+        }
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -133,6 +143,13 @@ public class DashboardActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 return true;
+            }
+        });
+        viewAllDashboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DashboardActivity.this, FilterPets.class);
+                startActivity(intent);
             }
         });
 

@@ -56,13 +56,13 @@
 
                     <ImageView
                         android:id="@+id/notificationTopDashboard"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_marginEnd="32dp"
                         app:layout_constraintBottom_toBottomOf="@+id/profileImageDashboard"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/profileImageDashboard"
-                        app:srcCompat="@drawable/notification" />
+                        app:srcCompat="@drawable/purffectmatchlogo" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
@@ -266,6 +266,7 @@
                             android:layout_weight="1"
                             android:text="@string/view_allDashboard"
                             android:textAlignment="viewEnd"
+                            android:clickable="true"
                             android:textColor="@color/dark_blue"
                             android:textStyle="bold" />
 
