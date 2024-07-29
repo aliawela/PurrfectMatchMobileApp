@@ -103,6 +103,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/dogCardView"
                         android:layout_width="100dp"
                         android:layout_height="120dp"
                         android:layout_margin="10dp"
@@ -130,7 +131,7 @@
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/favorites" />
+                                    app:srcCompat="@drawable/dog_svgrepo_com" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <TextView
@@ -144,6 +145,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/catCardView"
                         android:layout_width="100dp"
                         android:layout_height="120dp"
                         android:layout_margin="10dp"
@@ -171,7 +173,7 @@
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/message" />
+                                    app:srcCompat="@drawable/cat_svgrepo_com_" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <TextView
@@ -185,6 +187,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/otherCardView"
                         android:layout_width="100dp"
                         android:layout_height="120dp"
                         android:layout_margin="10dp"
@@ -212,7 +215,7 @@
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/favorites" />
+                                    app:srcCompat="@drawable/rabbit_svgrepo_com" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <TextView

@@ -2,6 +2,7 @@ package com.example.purrfectmatchmobileapp;
 
 import static com.example.purrfectmatchmobileapp.ColumnCalculator.calculateNoOfColumns;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -102,6 +105,7 @@ public class DashboardActivity extends AppCompatActivity {
         if (isNightMode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
+
         auth = FirebaseAuth.getInstance();
         petRef = FirebaseDatabase.getInstance().getReference("Pets");
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -133,9 +137,7 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
         // Set the default fragment or activity
-        if (savedInstanceState == null) {
-            // Default action, if needed
-        }
+
 
         RecyclerView recyclerViewDashboard = findViewById(R.id.recyclerDashBoard);
 
@@ -145,11 +147,28 @@ public class DashboardActivity extends AppCompatActivity {
         recyclerViewDashboard.setLayoutManager(layoutManagerDashboard);
 
         dashboardPetAdapter = new PetAdapter(new ArrayList<>(), pet -> {
-            // Handle pet item click here (e.g., open details activity)
+            Intent intent = new Intent(DashboardActivity.this, PetInfoActivity.class);
+            intent.putExtra("PET_DATA", pet);
+            startActivity(intent);
         });
         recyclerViewDashboard.setAdapter(dashboardPetAdapter);
 
         fetchRandomPetsForDashboard();
+
+        LinearLayout dogCard = findViewById(R.id.dogCardDashboard);
+        LinearLayout catCard = findViewById(R.id.catCardDashboard);
+        LinearLayout othersCard = findViewById(R.id.othersCardDashboard);
+        dogCard.setOnClickListener(view -> startFilterActivity("Dogs"));
+        catCard.setOnClickListener(view -> startFilterActivity("Cats"));
+        othersCard.setOnClickListener(view -> startFilterActivity("Others"));
+
+
+    }
+
+    private void startFilterActivity(String filter) {
+        Intent intent = new Intent(DashboardActivity.this, FilterPets.class);
+        intent.putExtra("FILTER_KEY", filter);
+        startActivity(intent);
     }
     public void loadLocale(){
         SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
@@ -196,7 +215,7 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        getNameAndPhoto();
+
         fetchRandomPetsForDashboard();
     }
 
@@ -253,7 +272,6 @@ public class DashboardActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
     private void signInWithEmailAndPassword(String email, String password) {
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -261,7 +279,7 @@ public class DashboardActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Auto-login successful, stay on DashboardActivity
-                            Toast.makeText(DashboardActivity.this, "Auto-login successful", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(DashboardActivity.this, "Auto-login successful", Toast.LENGTH_SHORT).show();
                         } else {
                             // Auto-login failed, navigate to LoginActivity
                             Toast.makeText(DashboardActivity.this, "Auto-login failed", Toast.LENGTH_SHORT).show();
@@ -297,7 +315,7 @@ public class DashboardActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Firebase authentication successful, stay on DashboardActivity
-                            Toast.makeText(DashboardActivity.this, "Auto-login successful", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(DashboardActivity.this, "Auto-login successful", Toast.LENGTH_SHORT).show();
                         } else {
                             // Firebase authentication failed, navigate to LoginActivity
                             Toast.makeText(DashboardActivity.this, "Auto-login failed", Toast.LENGTH_SHORT).show();
@@ -307,6 +325,5 @@ public class DashboardActivity extends AppCompatActivity {
                     }
                 });
     }
-
 
 }

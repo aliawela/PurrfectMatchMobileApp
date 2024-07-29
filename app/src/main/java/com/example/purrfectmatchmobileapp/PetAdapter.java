@@ -72,4 +72,6 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
         petList.addAll(newPetList);
         notifyDataSetChanged();
     }
+
+
 }

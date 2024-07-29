@@ -199,7 +199,6 @@ public class Settings extends AppCompatActivity {
     private void onLogoutClicked(View view) {
         auth.signOut();
 
-
         // Clear stored credentials
         clearCredentials(this);
         startActivity(new Intent(Settings.this, DashboardActivity.class));

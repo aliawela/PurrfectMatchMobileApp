@@ -95,6 +95,13 @@
                     android:orientation="vertical"
                     android:padding="15dp">
 
+                    <TextView
+                        android:id="@+id/txtPetGender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Male"
+                        android:textSize="34sp" />
                 </LinearLayout>
                 <LinearLayout
                     android:background="@drawable/round_orange_info"
@@ -105,6 +112,13 @@
                     android:orientation="vertical"
                     android:padding="15dp">
 
+                    <TextView
+                        android:id="@+id/txtPetFee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Male"
+                        android:textSize="34sp" />
                 </LinearLayout>
                 <LinearLayout
                     android:background="@drawable/round_pink_info"
@@ -115,6 +129,13 @@
                     android:orientation="vertical"
                     android:padding="15dp">
 
+                    <TextView
+                        android:id="@+id/txtPetType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Male"
+                        android:textSize="34sp" />
                 </LinearLayout>
 
 

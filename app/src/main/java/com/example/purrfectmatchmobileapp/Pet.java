@@ -1,6 +1,11 @@
 package com.example.purrfectmatchmobileapp;
 
-public class Pet {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class Pet  implements Parcelable {
     private String activity_level;
     private int adoption_fee;
     private String coat_length;
@@ -47,6 +52,33 @@ public class Pet {
         this.shelter_name = shelter_name;
     }
 
+
+    protected Pet(Parcel in) {
+        activity_level = in.readString();
+        adoption_fee = in.readInt();
+        coat_length = in.readString();
+        gender = in.readString();
+        good_in_home = in.readByte() != 0;
+        health = in.readString();
+        house_training = in.readString();
+        id = in.readInt();
+        name = in.readString();
+        imgUrl = in.readString();
+        pet_type = in.readString();
+        shelter_name = in.readString();
+    }
+
+    public static final Creator<Pet> CREATOR = new Creator<Pet>() {
+        @Override
+        public Pet createFromParcel(Parcel in) {
+            return new Pet(in);
+        }
+
+        @Override
+        public Pet[] newArray(int size) {
+            return new Pet[size];
+        }
+    };
 
     public String getActivity_level() {
         return activity_level;
@@ -147,19 +179,31 @@ public class Pet {
 
     @Override
     public String toString() {
-        return "Pet{" +
-                "activity_level='" + activity_level + '\'' +
-                ", adoption_fee=" + adoption_fee +
-                ", coat_length='" + coat_length + '\'' +
-                ", gender='" + gender + '\'' +
-                ", good_in_home=" + good_in_home +
-                ", health='" + health + '\'' +
-                ", house_training='" + house_training + '\'' +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", imgUrl='" + imgUrl + '\'' +
-                ", pet_type='" + pet_type + '\'' +
-                ", shelter_name='" + shelter_name + '\'' +
-                '}';
+        return "Meet " + name + ", a " + gender + " " + pet_type+ " with " + coat_length +
+                " fur. This adorable pet is " + health + " and has an activity level of " +
+                activity_level + ". " + (good_in_home ? "They are known to be good in a home environment " : "") +"and their house training status is: " + house_training + ". " +
+                "If you're looking for a loving companion, " + name + " might be the perfect match! " +
+                "The adoption fee is " + adoption_fee + " and they are currently at " + shelter_name + ".";
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(activity_level);
+        parcel.writeInt(adoption_fee);
+        parcel.writeString(coat_length);
+        parcel.writeString(gender);
+        parcel.writeByte((byte) (good_in_home ? 1 : 0));
+        parcel.writeString(health);
+        parcel.writeString(house_training);
+        parcel.writeInt(id);
+        parcel.writeString(name);
+        parcel.writeString(imgUrl);
+        parcel.writeString(pet_type);
+        parcel.writeString(shelter_name);
     }
 }

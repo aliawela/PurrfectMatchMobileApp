@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     storeCredentials(LoginActivity.this, auth.getCurrentUser().getEmail(), null, "google");
                                                 }
 
-                                                startActivity(new Intent(LoginActivity.this, Settings.class));
+                                                startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                                             } else {
                                                 Toast.makeText(LoginActivity.this, "Failed to sign in: " + task.getException(), Toast.LENGTH_SHORT).show();
                                             }
@@ -136,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
         auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                     storeCredentials(this, email, password, "email");
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                     finish();
                 })
                 .addOnFailureListener(e -> {

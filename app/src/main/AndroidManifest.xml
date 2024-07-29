@@ -24,17 +24,9 @@
             android:name=".Settings"
             android:exported="false" />
         <activity
-            android:name=".viewholder_category"
-            android:exported="false" />
-        <activity
             android:name=".FilterPets"
             android:exported="false" />
-        <activity
-            android:name=".ProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DashboardActivity"
-            android:exported="false" />
+
         <activity
             android:name=".SignupActivity"
             android:exported="false" />
@@ -42,7 +34,7 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".DashboardActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

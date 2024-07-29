@@ -1,5 +1,6 @@
 package com.example.purrfectmatchmobileapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;import android.widget.LinearLayout;
 import android.widget.SearchView;
@@ -7,6 +8,7 @@ import android.widget.SearchView;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -39,7 +41,7 @@ public class FilterPets extends AppCompatActivity {
     private ValueEventListener valueEventListener;
     private boolean isLoading = false;
     private String currentFilter = null;
-    private List<Pet> allPetsCache = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +51,18 @@ public class FilterPets extends AppCompatActivity {
         setupWindowInsets();
         initializeRecyclerView();
         initializeFilterButtons();
+        String filter = getIntent().getStringExtra("FILTER_KEY");
+
         petRef = FirebaseDatabase.getInstance().getReference("Pets");
         fetchFirstPage(currentFilter);
+        if (filter != null) {
+            applyFilter(filter); // Apply the received filter
+        }
+        ConstraintLayout backFilterPage = findViewById(R.id.backFilterPage);
+        backFilterPage.setOnClickListener(view -> finish());
     }
+
+
 
     private void setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -66,7 +77,9 @@ public class FilterPets extends AppCompatActivity {
         int noOfColumns = ColumnCalculator.calculateNoOfColumns(this, 180);
         petRecyclerView.setLayoutManager(new GridLayoutManager(this, noOfColumns));
         petAdapter = new PetAdapter(petList, pet -> {
-            // Handle pet item click here (e.g., open details activity)
+            Intent intent = new Intent(FilterPets.this, PetInfoActivity.class);
+            intent.putExtra("PET_DATA", pet);
+            startActivity(intent);
         });
         petRecyclerView.setAdapter(petAdapter);
 
